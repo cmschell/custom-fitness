@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Contact</title>
+  <title>Profile</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta name="generator" content="SensationThemes">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -69,13 +69,13 @@
               </div>
               <div class="nav-menu-titles">Videos</div>
             </a>
-            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="coming-soon_a.html">
+            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="coming-soon.html">
                   <div class="icon-list-menu">
                     <div class="icon ion-ios-clock-outline"></div>
                   </div>
                   <div class="nav-menu-titles">Coming Soon</div>
             </a>
-            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="about-us_a.html">
+            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="about-us.html">
                   <div class="icon-list-menu">
                     <div class="icon ion-ios-person-outline"></div>
                   </div>
@@ -87,7 +87,7 @@
               </div>
               <div class="nav-menu-titles">Terms and Conditions</div>
             </a>
-            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="contact_a.html">
+            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="contact.html">
               <div class="icon-list-menu">
                 <div class="icon ion-ios-at-outline"></div>
               </div>
@@ -95,7 +95,7 @@
             </a>
           </nav>
           <div class="wrapper-mask" data-ix="menu-mask"></div>
-          <div class="navbar-title">Contact</div>
+          <div class="navbar-title">Profile</div>
           <div class="navbar-button right w-nav-button" data-ix="hide-navbar-icons" id="menu-button">
             <div class="home-icon navbar-button-icon">
               <div class="bar-home-icon top"></div>
@@ -107,34 +107,83 @@
       </div>
       <div class="body padding">
         <div class="w-form">
-          <form action="#" data-name="Email Form" id="email-form" name="email-form">
+          <form action="login.html" data-name="Email Form" data-redirect="login.html" id="email-form" name="email-form">
             <div class="separator-button-input"></div>
             <div>
-              <label class="label-form" for="first-name-field">FIRST NAME</label>
-              <input class="input-form w-input" data-name="first-name" id="first-name-field" maxlength="15" name="first-name" required="required" type="text">
+              <label class="label-form" for="full-name-field">FIRST NAME</label>
+              <input class="input-form w-input" data-name="first-name" id="firstname-field" maxlength="15" name="firstname-name" required="required" type="text">
               <div class="separator-fields"></div>
             </div>
             <div>
-              <label class="label-form" for="last-name-field">LAST NAME</label>
-              <input class="input-form w-input" data-name="full-name" id="last-name-field" maxlength="15" name="last-name" type="text">
+              <label class="label-form" for="full-name-field">LAST NAME</label>
+              <input class="input-form w-input" data-name="last-name" id="lastname-field" maxlength="15" name="lastname-name" required="required" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="email-field">USERNAME</label>
+              <input class="input-form w-input" data-name="username" id="username-field" maxlength="15" name="username" required="required" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="password-ield">PASSWORD</label>
+              <input class="input-form w-input" data-name="password" id="password-field" maxlength="10" name="password" required="required" type="password">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="password-ield">CONFIRM PASSWORD</label>
+              <input class="input-form w-input" data-name="confirmpassword" id="confirmpassword-field" maxlength="10" name="confrimpassword" required="required" type="password">
               <div class="separator-fields"></div>
             </div>
             <div>
               <label class="label-form" for="email-field">EMAIL</label>
-              <input class="input-form w-input" data-name="email" id="email-field" maxlength="20" name="email" required="required" type="email">
+              <input class="input-form w-input" data-name="email" id="email-field" maxlength="256" name="email" required="required" type="email">
               <div class="separator-fields"></div>
             </div>
             <div>
-              <label class="label-form" for="subject-field">SUBJECT</label>
-              <input class="input-form w-input" data-name="subject" id="subject-field" maxlength="256" name="subject" required="required" type="text">
+              <label class="label-form" for="field">MONTH OF BIRTH</label>
+              <input class="input-form w-input" data-name="monthofbirth" id="monthofbirth-field" maxlength="15" name="monthofbirth" required="required" type="text">
               <div class="separator-fields"></div>
             </div>
             <div>
-              <label class="label-form" for="message">MESSAGE</label>
-              <textarea class="input-form textarea w-input" data-name="message" id="message" maxlength="5000" name="message"></textarea>
+              <label class="label-form" for="field">YEAR OF BIRTH</label>
+              <input class="input-form w-input" data-name="yearofbirth" id="yearofbirth-field" maxlength="4" name="yearofbirth" required="required" type="text">
+              <div class="separator-fields"></div>
             </div>
-            <div class="separator-button-input"></div>
-            <input class="action-button w-button" data-wait="Please wait..." type="submit" value="Send">
+            <div>
+              <label class="label-form" for="field">PHONE NUMBER</label>
+              <input class="input-form w-input" data-name="phonenumber" id="phonenumber-field" maxlength="10" name="phonenumber" required="required" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="field">HEIGHT (inches)</label>
+              <input class="input-form w-input" data-name="height" id="height-field" maxlength="2" name="height" required="required" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="field">WEIGHT (pounds)</label>
+              <input class="input-form w-input" data-name="weight" id="weight-field" maxlength="3" name="weight" required="required" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <div class="input-form one-line w-clearfix">
+                <label class="label-form middle" for="email">GENDER</label>
+                <div class="radios-container w-clearfix">
+                  <div class="radio-button w-clearfix w-radio">
+                    <div class="radio-bullet-replacement"></div>
+                    <input class="radio-bullet w-radio-input" data-name="Radio1" id="node" name="Radio1" type="radio" value="1">
+                    <label class="w-form-label" for="node">Female</label>
+                  </div>
+                  <div class="radio-button w-clearfix w-radio">
+                    <div class="checked radio-bullet-replacement"></div>
+                    <input class="radio-bullet w-radio-input" data-name="Radio1" id="node-2" name="Radio1" type="radio" value="0">
+                    <label class="w-form-label" for="node-2">Male</label>
+                  </div>
+                </div>
+              </div>
+              <div class="separator-fields"></div>
+            </div>
+            <input class="action-button w-button" data-wait="Please wait..." type="submit" value="Create Account">
+              <div class="separator-button"></div><a class="link-upper" data-load="1" href="login.html">Don't have an account? <strong class="b-link">Sign Up</strong></a>
           </form>
         </div>
       </div>
