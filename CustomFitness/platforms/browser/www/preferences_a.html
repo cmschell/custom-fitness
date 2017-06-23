@@ -129,9 +129,9 @@
               <div class="separator-fields"></div>
               <select class="input-form select w-select preferences input" id="node-11">
                 <option value="">Select one...</option>
-                <option value="0">Beginner</option>
-                <option value="1">Intermediate</option>
-                <option value="2">Advanced</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
               </select>
               </div>
               <div class="separator-fields"></div>
@@ -141,11 +141,11 @@
               <div class="separator-fields"></div>
               <select class="input-form select w-select preferences-input" id="node-12">
                 <option value="">Select one...</option>
-                <option value="Weight Loss">Weight Loss</option>
-                <option value="Gain Strength">Gain Strength</option>
-                <option value="Increase Mobility">Increase Mobility</option>
-                <option value="Run Faster">Run Faster</option>
-                <option value="No Goal">No Goal Today</option>
+                <option value="weight_loss">Weight Loss</option>
+                <option value="gain_strength">Gain Strength</option>
+                <option value="increase_mobility">Increase Mobility</option>
+                <option value="run_faster">Run Faster</option>
+                <option value="no_goal">No Goal Today</option>
               </select>
             </div>
             <div style="margin-top: 20px;">
@@ -153,14 +153,14 @@
               <div class="separator-fields"></div>
               <select class="input-form select w-select" id="node-13" disabled>
                 <option value="">Select one...</option>
-                <option value="Abs">Abs</option>
-                <option value="Chest">Chest</option>
-                <option value="Back">Back</option>
-                <option value="Arms">Arms</option>
-                <option value="Legs">Legs</option>
-                <option value="Running">Running</option>
-                <option value="No Goal">Flexability</option>
-                <option value="Generic Cardio">Generic Cardio</option>
+                <option value="abs">Abs</option>
+                <option value="chest">Chest</option>
+                <option value="back">Back</option>
+                <option value="arms">Arms</option>
+                <option value="legs">Legs</option>
+                <option value="running">Running</option>
+                <option value="flexability">Flexability</option>
+                <option value="generic_cardio">Generic Cardio</option>
               </select>
             </div>
             <input class="action-button w-button" style="margin-top: 30px;" data-wait="Please wait..." type="submit" value="Create Workout"/>
@@ -187,6 +187,24 @@
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script src="js/js.cookie.js"></script>
+
+  <script type="text/javascript">
+    
+    jQuery('#email-form').submit(function() {
+      var location = jQuery("#node-10 option:selected").val();
+      var fitnessLevel = jQuery("#node-11 option:selected").val();
+      var goal = jQuery("#node-12 option:selected").val();
+      var desiredWorkout = jQuery("#node-13 option:selected").val() ? jQuery("#node-10 option:selected").val() : "";
+      if(Cookies) {
+        Cookies.set('location', location);
+        Cookies.set('fitnessLevel', fitnessLevel);
+        Cookies.set('goal', goal);
+        Cookies.set('desiredWorkout', desiredWorkout);
+      }
+    });
+
+  </script>
 
 </body>
 </html>

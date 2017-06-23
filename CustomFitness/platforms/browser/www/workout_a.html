@@ -6,6 +6,7 @@
   <meta content="Profile" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta name="generator" content="SensationThemes">
+  <meta http-equiv="Content-Security-Policy" content="" connect-src="*" />
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -229,6 +230,52 @@
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script src="js/js.cookie.js"></script>
 
+  <script type="text/javascript">
+    $("document").ready(function(){
+console.log("document ready")
+      if(Cookies) {
+        var location = Cookies.get('location'); // => 'value'
+        var fitnessLevel = Cookies.get('fitnessLevel'); // => 'value'
+        var goal = Cookies.get('goal'); // => 'value'
+        var desiredWorkout = Cookies.get('desiredWorkout'); // => 'value'
+      }
+        var data = {
+          "location": location,
+          "fitnessLevel": fitnessLevel,
+          "goal": goal,
+          "desiredWorkout": desiredWorkout
+        };
+
+        data = "foo=bar" +$(this).serialize() + "&" + $.param(data);
+
+        console.log("data:" +data)
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "http://localhost/~ChristinaSchell/php/response.php", //Relative or absolute path to response.php file
+          data: data,
+          success: function(data) {
+
+              console.log(data);
+             // alert(JSON.stringify(data));
+
+            $(".body").html(
+              "location: " + data["location"] + "<br />fitnessLevel: " + data["fitnessLevel"] + "<br />goal: " + data["goal"] + "<br />JSON: " + data["json"]
+            );
+
+            alert("Form submitted successfully.\nReturned json: " + data["json"]);
+          },
+          error: function(e) {
+              alert('Error: ' + e.message);
+          }
+
+        });
+
+
+    });
+  </script>
 </body>
 </html>

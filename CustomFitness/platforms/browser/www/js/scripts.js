@@ -92,9 +92,9 @@ $(function() {
 
     // Preferences select
     jQuery('#node-12').on('change',function(){
-      if (this.value == "No Goal") 
+      if (this.value == "no_goal") 
         jQuery('#node-13').prop("disabled",false);
-      else if (this.value != "No Goal")
+      else if (this.value != "no_goal")
         jQuery('#node-13').prop("disabled",true);
 
     });
