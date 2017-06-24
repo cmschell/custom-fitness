@@ -30,23 +30,24 @@ if ($conn->connect_error) {
 //}
 
 function query() {
-  $sql = "SELECT * FROM `Location` WHERE `Zipcode` = 92020";
-  
-  echo $sql;
-
-  $result = $conn->query($sql);
-
-  echo $result;
-
-  if ($result->num_rows > 0) {
-      // output data of each row
-      while($row = $result->fetch_assoc()) {
-          // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-          $row;
-      }
-  } else {
-      echo "0 results";
+  $data=array();
+  $q=mysqli_query($conn,"select * from `Location` where Zipcode = '92020'");
+  while ($row=mysqli_fetch_object($q)){
+   $data[]=$row;
   }
+
+  // HERE IS AN EXAMPLE OF LOGIC YOU WANT TO USE/CREATE 
+  // if ($result->num_rows > 0) {
+  //     // output data of each row
+  //     while($row = $result->fetch_assoc()) {
+  //         // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+  //         $row;
+  //     }
+  // } else {
+  //     echo "0 results";
+  // }
+
+  echo json_encode($data);
 }
 
 
@@ -69,7 +70,5 @@ function test_function(){
 /// END TEST 
 
 $conn->close(); 
-
-
 
 ?>
