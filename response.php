@@ -1,58 +1,64 @@
 <?php
+ // header("Access-Control-Allow-Origin: *"); We might need this when we upload to server
 
-/// TEST - We can use something like this to return data
-$servername = "174.136.46.205";
+//Connect To Database
+$hostname = "174.136.46.205";
 $username = "magneti_wpuser";
 $password = "MuseDB!";
 $dbname = "magneti_customfitness";
 
-// $con = mysqli_connect("174.136.46.205","magneti_wpuser","MuseDB!","magneti_customfitness") or die ("could not connect database");
+// Set variables for select query
+$usertable='Location';
+$yourfield = 'Zipcode';
 
+// Connection string
+mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
+mysql_select_db($dbname);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+if (isset($_REQUEST["location"]) && !empty($_REQUEST["location"])) { //Checks if location value exists
 
-//if (is_ajax()) {
-  if (isset($_REQUEST["location"]) && !empty($_REQUEST["location"])) { //Checks if location value exists
-    $location = $_REQUEST["location"];
-    $fitnessLevel = $_REQUEST["fitnessLevel"];
-    $goal = $_REQUEST["goal"];
-    $desiredWorkout = $_REQUEST["desiredWorkout"];
+  // Collect variables from cookies set on preferences_a.html
+  $location = $_REQUEST["location"];
+  $fitnessLevel = $_REQUEST["fitnessLevel"];
+  $goal = $_REQUEST["goal"];
+  $desiredWorkout = $_REQUEST["desiredWorkout"];
 
-    switch($location) { //Switch case for value of action
-      case "92020": query(); break;
-    }
-  }
-//}
-
-function query() {
-  $data=array();
-  $q=mysqli_query($conn,"select * from `Location` where Zipcode = '92020'");
-  while ($row=mysqli_fetch_object($q)){
-   $data[]=$row;
-  }
-
-  // HERE IS AN EXAMPLE OF LOGIC YOU WANT TO USE/CREATE 
-  // if ($result->num_rows > 0) {
-  //     // output data of each row
-  //     while($row = $result->fetch_assoc()) {
-  //         // echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-  //         $row;
-  //     }
-  // } else {
-  //     echo "0 results";
-  // }
-
-  echo json_encode($data);
+  // TEST
+ /* switch($location) { //Switch case for value of action
+      case "92111": test_function(); break;
+    } */
+ // END TEST
 }
 
 
-// THIS IS A TEST FUNCTION TO RETURN RESULTS IN JSON FORMAT
-// NEED TO COMBINE THIS FUNCTION WITH THE "query" FUNCTiON
+// Query the database
+$query = 'SELECT * FROM ' . $usertable;
+
+// Capture results in a variable to use in loop
+$result = mysql_query($query);
+
+// Create array for query results output
+$data=array();
+ 
+if($result) {
+
+  /* Loop throught the results and push into data array, might need to update
+   this to handle the results we are getting from query. This is just for simlple
+   example 
+  */  
+  while($row = mysql_fetch_array($result)){
+   $data[]=$row;
+  }
+
+  // Parse to JSON format for handling in workout_a.html
+  echo json_encode($data);
+
+} else {
+  print "Database NOT Found ";
+}
+
+
+// THIS IS A TEST FUNCTION TO RETURN RESULTS IN JSON FORMAT - use this in the switch statement to test
 function test_function(){
   $return = $_REQUEST;
 
@@ -69,6 +75,7 @@ function test_function(){
 }
 /// END TEST 
 
-$conn->close(); 
+// Not sure if we need the below line
+//$conn->close(); 
 
 ?>

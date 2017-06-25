@@ -234,48 +234,52 @@
 
   <script type="text/javascript">
     $("document").ready(function(){
-console.log("document ready")
+      
+      // See when DOM is ready for timing - we might want to execute script right away if there is a delay
+      console.log("document ready")
+
+      // Get the cookies that were set on the previous page
       if(Cookies) {
         var location = Cookies.get('location'); // => 'value'
         var fitnessLevel = Cookies.get('fitnessLevel'); // => 'value'
         var goal = Cookies.get('goal'); // => 'value'
         var desiredWorkout = Cookies.get('desiredWorkout'); // => 'value'
       }
-        var data = {
-          "location": location,
-          "fitnessLevel": fitnessLevel,
-          "goal": goal,
-          "desiredWorkout": desiredWorkout
-        };
 
-        data = "foo=bar" +$(this).serialize() + "&" + $.param(data);
+      // Create object for esier handling
+      var data = {
+        "location": location,
+        "fitnessLevel": fitnessLevel,
+        "goal": goal,
+        "desiredWorkout": desiredWorkout
+      };
+
+      // Serialize data object to send in POST
+      data = "foo=bar" +$(this).serialize() + "&" + $.param(data);
 
         console.log("data:" +data)
 
-        $.ajax({
-          type: "POST",
-          dataType: "json",
-          url: "http://localhost/~ChristinaSchell/php/response.php", //Relative or absolute path to response.php file
-          data: data,
-          success: function(data) {
+        // Define helper funciton for POST and getJSON combo
+        $.postJSON = function(url, data, func)
+        {
+            $.post(url, data, func, 'json');
+        }
 
-              console.log(data);
-             // alert(JSON.stringify(data));
+        // Post the data and create callback function for when we receive results from response.php
+        $.postJSON("http://localhost/~ChristinaSchell/php/response.php",data, function (data) {
+           console.log(data[0].Zipcode); // This is to make sure we received the JSON
 
-            $(".body").html(
-              "location: " + data["location"] + "<br />fitnessLevel: " + data["fitnessLevel"] + "<br />goal: " + data["goal"] + "<br />JSON: " + data["json"]
-            );
 
-            alert("Form submitted successfully.\nReturned json: " + data["json"]);
-          },
-          error: function(e) {
-              alert('Error: ' + e.message);
+          // Here is where we handle the received results and update the page's html  
+          for (var i = 0; i < data.length; i++) {
+            $('.list.list-events li:eq('+i+')').html(
+              "Street Number: " + data[i]["Street_No"] + "<br />Street Name: " + data[i]["Street_Name"] + "<br />City: " + data[i]["City"] + "<br />State: " + data[i]["State"] + "<br />Zipcode: " + data[i]["Zipcode"] +"<p>&nbsp;</p>"
+              );
           }
 
+
         });
-
-
-    });
+    }); // end document.ready
   </script>
 </body>
 </html>
