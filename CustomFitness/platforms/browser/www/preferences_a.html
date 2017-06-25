@@ -187,21 +187,32 @@
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
-  <script src="js/js.cookie.js"></script>
+  <!-- library for localstorage handling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
 
   <script type="text/javascript">
     
     jQuery('#email-form').submit(function() {
+
       var location = jQuery("#node-10 option:selected").val();
       var fitnessLevel = jQuery("#node-11 option:selected").val();
       var goal = jQuery("#node-12 option:selected").val();
       var desiredWorkout = jQuery("#node-13 option:selected").val() ? jQuery("#node-10 option:selected").val() : "";
-      if(Cookies) {
-        Cookies.set('location', location);
-        Cookies.set('fitnessLevel', fitnessLevel);
-        Cookies.set('goal', goal);
-        Cookies.set('desiredWorkout', desiredWorkout);
-      }
+
+      localforage.setItem('form_data', [location, fitnessLevel, goal, desiredWorkout]).then(function (value) {
+       // Do other things once the value has been saved.
+          console.log('Form data stored successfully in local storage: location - '+location+', fitnessLevel - '+fitnessLevel+', goal - '+goal+', desiredWorkout - '+desiredWorkout);
+      }).catch(function(err) {
+          // This code runs if there were any errors
+          console.log('Error soring form data via localforage: '+err);
+      });
+
+      // if(Cookies) {
+      //   Cookies.set('location', location);
+      //   Cookies.set('fitnessLevel', fitnessLevel);
+      //   Cookies.set('goal', goal);
+      //   Cookies.set('desiredWorkout', desiredWorkout);
+      // }
     });
 
   </script>
