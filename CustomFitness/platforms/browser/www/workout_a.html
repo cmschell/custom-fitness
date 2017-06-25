@@ -271,7 +271,8 @@
         }
 
         // Post the data and create callback function for when we receive results from response.php
-        $.postJSON("http://localhost/~ChristinaSchell/php/response.php",data, function (data) {
+        // $.postJSON("http://localhost/~ChristinaSchell/php/response.php",data, function (data) {
+          $.postJSON("http://christinasund.com/custom-fitness//response.php",data, function (data) {
            console.log(data[0].Zipcode); // This is to make sure we received the JSON
 
 
