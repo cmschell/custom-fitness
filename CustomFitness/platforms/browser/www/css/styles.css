@@ -1903,66 +1903,12 @@ a {
   float: left;
 }
 
-.profile-list-image.bg-1 {
-  /*background-image: url('http://placehold.it/350x350');*/
-  background-image: url('../images/app_images_unedited/barbell-bench-press.jpg');
+.profile-list-image.bg-1, .profile-list-image.bg-2, .profile-list-image.bg-3, .profile-list-image.bg-4, .profile-list-image.bg-5, .profile-list-image.bg-6, .profile-list-image.bg-7, .profile-list-image.bg-8, .profile-list-image.bg-9, .profile-list-image.bg-10, .profile-list-image.bg-11, .profile-list-image.bg-12 {
+  background-image: url('../images/exercise_img/barbell-bench-press.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
 
-.profile-list-image.bg-2 {
-  background-image: url('../images/app_images_unedited/barbell-deadlift.jpg');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-3 {
-  background-image: url('../images/app_images_unedited/leg-press.jpg');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-4 {
-  background-image: url('../images/app_images_unedited/smith-machine-squat.jpg');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-5 {
-  background-image: url('../images/app_images_unedited/t-bar-row.jpg');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-6 {
-  background-image: url('http://placehold.it/350x350');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-7 {
-  background-image: url('http://placehold.it/350x350');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-8 {
-  background-image: url('http://placehold.it/350x350');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-9 {
-  background-image: url('http://placehold.it/350x350');
-  background-position: 0px 0px;
-  background-size: cover;
-}
-
-.profile-list-image.bg-10 {
-  background-image: url('http://placehold.it/350x350');
-  background-position: 0px 0px;
-  background-size: cover;
-}
 
 .profile-list-link {
   display: block;

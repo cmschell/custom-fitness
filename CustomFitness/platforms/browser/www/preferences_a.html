@@ -107,7 +107,7 @@
       </div>
       <div class="body padding">
         <div class="w-form">
-          <form action="workout_a.html" data-name="Email Form" id="email-form" name="email-form">
+          <form action="workout_a.html" method="get" data-name="Email Form" id="email-form" name="email-form">
             <div class="separator-button-input" style="margin-bottom: 20px;"></div>
             <div>
               <label class="label-form" for="node-10">LOCATION</label>
@@ -115,12 +115,12 @@
               <select class="input-form select w-select preferences-input" id="node-10">
                 <option value="">Select one...</option>
                 <option value="92111">24 Hour Fitness Balboa</option>
-                <option value="92122">24 Hour Fitness UTC</option>
-                <option value="91942">24 Hour Fitness La Mesa</option>
-                <option value="92101">24 Hour Fitness Horton Plaza</option>
-                <option value="92110">24 Hour Fitness Point Loma</option>
+                <option value="92020">24 Hour Fitness UTC</option>
+                <option value="92109">24 Hour Fitness La Mesa</option>
+                <option value="92020">24 Hour Fitness Horton Plaza</option>
+                <option value="92111">24 Hour Fitness Point Loma</option>
                 <option value="92109">24 Hour Fitness Pacific Beach</option>
-                <option value="92108">24 Hour Fitness Mission Valley</option>
+                <option value="92111">24 Hour Fitness Mission Valley</option>
               </select>
             </div>
             <div class="separator-fields"></div>
@@ -141,11 +141,11 @@
               <div class="separator-fields"></div>
               <select class="input-form select w-select preferences-input" id="node-12">
                 <option value="">Select one...</option>
-                <option value="weight_loss">Weight Loss</option>
-                <option value="gain_strength">Gain Strength</option>
-                <option value="increase_mobility">Increase Mobility</option>
-                <option value="run_faster">Run Faster</option>
-                <option value="no_goal">No Goal Today</option>
+                <option value="weight loss">Weight Loss</option>
+                <option value="gain strength">Gain Strength</option>
+                <option value="increase mobility">Increase Mobility</option>
+                <option value="run faster">Run Faster</option>
+                <option value="no goal">No Goal Today</option>
               </select>
             </div>
             <div style="margin-top: 20px;">
@@ -153,14 +153,14 @@
               <div class="separator-fields"></div>
               <select class="input-form select w-select" id="node-13" disabled>
                 <option value="">Select one...</option>
-                <option value="abs">Abs</option>
-                <option value="chest">Chest</option>
-                <option value="back">Back</option>
-                <option value="arms">Arms</option>
-                <option value="legs">Legs</option>
-                <option value="running">Running</option>
-                <option value="flexability">Flexability</option>
-                <option value="generic_cardio">Generic Cardio</option>
+                <option value="Abs">Abs</option>
+                <option value="Chest">Chest</option>
+                <option value="Back">Back</option>
+                <option value="Arms">Arms</option>
+                <option value="Legs">Legs</option>
+                <option value="Running">Running</option>
+                <option value="Flexability">Flexability</option>
+                <option value="Generic Cardio">Generic Cardio</option>
               </select>
             </div>
             <input class="action-button w-button" style="margin-top: 30px;" data-wait="Please wait..." type="submit" value="Create Workout"/>
@@ -197,22 +197,39 @@
       var location = jQuery("#node-10 option:selected").val();
       var fitnessLevel = jQuery("#node-11 option:selected").val();
       var goal = jQuery("#node-12 option:selected").val();
-      var desiredWorkout = jQuery("#node-13 option:selected").val() ? jQuery("#node-10 option:selected").val() : "";
+      var desiredWorkout = jQuery("#node-13 option:selected").val() ? jQuery("#node-13 option:selected").val() : "none";
 
-      localforage.setItem('form_data', [location, fitnessLevel, goal, desiredWorkout]).then(function (value) {
-       // Do other things once the value has been saved.
-          console.log('Form data stored successfully in local storage: location - '+location+', fitnessLevel - '+fitnessLevel+', goal - '+goal+', desiredWorkout - '+desiredWorkout);
+      localforage.removeItem('form_data').then(function() {
+          // Run this code once the database has been entirely deleted.
+          console.log('Database is now empty.');
+
+          localforage.getItem('user_preferences').then(function (value) {
+           // Do other things once the value has been saved.
+              console.log('Form data retrieved successfully in local storage: birthMonth- '+value[0]+', birthYear- '+value[1]+', userFullName - '+value[2]);
+
+              var m = value[0];
+              var y = value[1];
+              var fn = value[2];
+
+              localforage.setItem('form_data', [location, fitnessLevel, goal, desiredWorkout, m, y, fn]).then(function (value) {
+                 // Do other things once the value has been saved.
+                    console.log('Form data stored successfully in local storage: location - '+location+', fitnessLevel - '+fitnessLevel+', goal - '+goal+', desiredWorkout - '+desiredWorkout+', month - '+m+', year - '+y+', user full name - '+fn);
+                }).catch(function(err) {
+                    // This code runs if there were any errors
+                    console.log('Error soring form data via localforage: '+err);
+                });
+
+          }).catch(function(err) {
+              // This code runs if there were any errors
+              console.log('Error soring form data via localforage: '+err);
+          });
+
+
       }).catch(function(err) {
           // This code runs if there were any errors
-          console.log('Error soring form data via localforage: '+err);
+          console.log(err);
       });
 
-      // if(Cookies) {
-      //   Cookies.set('location', location);
-      //   Cookies.set('fitnessLevel', fitnessLevel);
-      //   Cookies.set('goal', goal);
-      //   Cookies.set('desiredWorkout', desiredWorkout);
-      // }
     });
 
   </script>

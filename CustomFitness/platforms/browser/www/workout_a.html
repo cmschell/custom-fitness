@@ -14,6 +14,14 @@
   <link href="images/logo.png" rel="apple-touch-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
+  <script src="js/modernizr.js" type="text/javascript"></script>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <!-- library for localstorage handling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
+  <!-- logic to build and display workout -->
+  <script type="text/javascript" src="js/buildWorkout2.js"></script>
 </head>
 <body>
   <section class="mobile-wrapper">
@@ -116,27 +124,27 @@
             <div class="profile-avatar"><img class="profile-avatar-image" src="images/Strength.png" width="74">
             </div>
             <div class="profile-avatar-name-container">
-              <div class="profile-avatar-name">Henry Peterson</div>
-              <div class="profile-avatar-job">Gain Strength</div>
+              <div class="profile-avatar-name"></div>
+              <div class="profile-avatar-job"></div>
             </div>
           </div>
           <div class="profile-figures">
             <div class="w-row">
               <div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
                 <div class="profile-figures-column-group">
-                  <div class="profile-figures-number">5</div>
+                  <div class="profile-figures-number"></div>
                   <div class="profile-figures-title">Excercises</div>
                 </div>
               </div>
               <div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
                 <div class="profile-figures-column-group">
-                  <div class="profile-figures-number">15-18</div>
+                  <div class="profile-figures-number"></div>
                   <div class="profile-figures-title">Sets</div>
                 </div>
               </div>
               <div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
                 <div class="profile-figures-column-group">
-                  <div class="profile-figures-number">40-45</div>
+                  <div class="profile-figures-number"></div>
                   <div class="profile-figures-title">Minutes</div>
                 </div>
               </div>
@@ -144,71 +152,6 @@
           </div>
         </div>
         <ul class="list list-events">
-          <li class="profile-list-bookmark" data-ix="list-item">
-            <a class="profile-list-link w-clearfix w-inline-block" data-load="1" href="video_a1.html?list=1">
-              <div class="bg-1 profile-list-image"></div>
-              <div class="profile-list-text">
-                <div class="event-title">Barbell Bench Press</div>
-                <div class="text-event-wrap w-clearfix">
-                  <div class="event-text suggested-stats"><span class="reps">6-8</span> reps</div>
-                  <div class="event-text suggested-stats"><span class="sets">3-4</span> sets</div>
-                  <div class="event-text suggested-stats"><span class="rest-amount">45<span><span class="rest-unit"> sec</span> rest</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li class="profile-list-bookmark" data-ix="list-item">
-            <a class="profile-list-link w-clearfix w-inline-block" data-load="1" href="video_a1.html?list=2">
-              <div class="bg-2 profile-list-image"></div>
-              <div class="profile-list-text">
-                <div class="event-title">Barbell Deadlift</div>
-                <div class="text-event-wrap w-clearfix">
-                  <div class="event-text suggested-stats"><span class="reps">6-8</span> reps</div>
-                  <div class="event-text suggested-stats"><span class="sets">3-4</span> sets</div>
-                  <div class="event-text suggested-stats"><span class="rest-amount">45</span><span class="rest-unit"> sec</span> rest</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li class="profile-list-bookmark" data-ix="list-item">
-            <a class="profile-list-link w-clearfix w-inline-block" data-load="1" href="video_a1.html?list=3">
-              <div class="bg-3 profile-list-image"></div>
-              <div class="profile-list-text">
-                <div class="event-title">Sled Leg Press</div>
-                <div class="text-event-wrap w-clearfix">
-                  <div class="event-text suggested-stats"><span class="reps">6-8</span> reps</div>
-                  <div class="event-text suggested-stats"><span class="sets">3-4</span> sets</div>
-                  <div class="event-text suggested-stats"><span class="rest-amount">2</span><span class="rest-unit"> min</span> rest</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li class="profile-list-bookmark" data-ix="list-item">
-            <a class="profile-list-link w-clearfix w-inline-block" data-load="1" href="video_a1.html?list=4">
-              <div class="bg-4 profile-list-image"></div>
-              <div class="profile-list-text">
-                <div class="event-title">Smith Machine Squat</div>
-                <div class="text-event-wrap w-clearfix">
-                  <div class="event-text suggested-stats"><span class="reps">6-8</span> reps</div>
-                  <div class="event-text suggested-stats"><span class="sets">3</span> sets</div>
-                  <div class="event-text suggested-stats"><span class="rest-amount">45</span><span class="rest-unit"> sec</span> rest</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li class="profile-list-bookmark" data-ix="list-item">
-            <a class="profile-list-link w-clearfix w-inline-block" data-load="1" href="video_a1.html?list=5">
-              <div class="bg-5 profile-list-image"></div>
-              <div class="profile-list-text">
-                <div class="event-title">T-Bar Row</div>
-                <div class="text-event-wrap w-clearfix">
-                  <div class="event-text suggested-stats"><span class="reps">6-8</span> reps</div>
-                  <div class="event-text suggested-stats"><span class="sets">3</span> sets</div>
-                  <div class="event-text suggested-stats"><span class="rest-amount">1</span><span class="rest-unit"> min</span> rest</div>
-                </div>
-              </div>
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -225,67 +168,6 @@
         families: ["Montserrat:400,700"]
       }
     });
-  </script>
-  <script src="js/modernizr.js" type="text/javascript"></script>
-  <script src="js/jquery.min.js" type="text/javascript"></script>
-  <script src="js/webflow.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
-  <!-- library for localstorage handling -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
-
-
-  <script type="text/javascript">
-    $("document").ready(function(){
-      
-      // See when DOM is ready for timing - we might want to execute script right away if there is a delay
-      console.log("document ready")
-
-      // Get the form data from local storage
-      var form_data = localforage.getItem('form_data').then(function(value) {
-          // This code runs once the value has been loaded
-          // from the offline store.
-          console.log('Data retrieved from localstorage: '+value.toString());
-
-      }).catch(function(err) {
-          // This code runs if there were any errors
-          console.log('Error retrieving form data from localstorage: '+err);
-      });
-
-      // Create object for esier handling
-      var data = {
-        "location": form_data[0],
-        "fitnessLevel": form_data[1],
-        "goal": form_data[2],
-        "desiredWorkout": form_data[3]
-      };
-
-      // Serialize data object to send in POST
-      data = "foo=bar" +$(this).serialize() + "&" + $.param(data);
-
-        console.log("data:" +data)
-
-        // Define helper funciton for POST and getJSON combo
-        $.postJSON = function(url, data, func)
-        {
-            $.post(url, data, func, 'json');
-        }
-
-        // Post the data and create callback function for when we receive results from response.php
-        // $.postJSON("http://localhost/~ChristinaSchell/php/response.php",data, function (data) {
-          $.postJSON("http://christinasund.com/custom-fitness/\/response.php",data, function (data) {
-           console.log(data[0].Zipcode); // This is to make sure we received the JSON
-
-
-          // Here is where we handle the received results and update the page's html  
-          for (var i = 0; i < data.length; i++) {
-            $('.list.list-events li:eq('+i+')').html(
-              "Street Number: " + data[i]["Street_No"] + "<br />Street Name: " + data[i]["Street_Name"] + "<br />City: " + data[i]["City"] + "<br />State: " + data[i]["State"] + "<br />Zipcode: " + data[i]["Zipcode"] +"<p>&nbsp;</p>"
-              );
-          }
-
-
-        });
-    }); // end document.ready
   </script>
 </body>
 </html>

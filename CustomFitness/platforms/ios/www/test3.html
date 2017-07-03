@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test 3</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var url="http://localhost/~ChristinaSchell/php/json.php";
+ $.getJSON(url,function(result){
+ alert(JSON.stringify(result));
+ $.each(result, function(i, field){
+ var id=field.id;
+ var title=field.title;
+ var duration=field.duration;
+ var price=field.price;
+ $("#listview").append("<a class='item' href='form.html?id="+id+"&title="+title+"&duration="+duration+"&price="+price+"'><span class='item-note'>$"+price+"</span><h2>"+ title + " </h2><p>"+ duration +"</p></a>");
+ });
+ });
+ });
+ </script>
+
+<div id="output"></div>
+
+</body>
+</html>

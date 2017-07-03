@@ -1,0 +1,13 @@
+{
+    "name": "com.capstone.customfitness",
+    "version": "1.0.0",
+    "displayName": "CustomFitness",
+    "cordova": {
+        "platforms": [
+            "ios"
+        ]
+    },
+    "dependencies": {
+        "cordova-ios": "~4.3.1"
+    }
+}
