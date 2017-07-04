@@ -27,14 +27,10 @@ $.postJSON("http://christinasund.com/custom-fitness/video.php",dataString, funct
         var description = data[i]["exercise_desc"];
         var titleString = data[i]["exercise_name"];
         var videoURL = data[i]["exercise_video"];
-        // var video_embeded = videoURL;
-        // var movieURL = 'https://www.youtube.com/v/'+video_embeded+'&hl=en_US&feature=player_embedded&version=3';
-        // var embedURL = 'https://www.youtube.com/v/'+video_embeded+'?suggestedQuality=medium&hl=en_US&feature=player_embedded&version=3';
+
 
         jQuery('.description-new').html(description);
         jQuery('.w-video iframe').attr('src', videoURL);
-        // jQuery('#movie').val(movieURL);
-        // jQuery('#embed').attr('src',embedURL)
         jQuery('.title-new').html(titleString);
 
     }

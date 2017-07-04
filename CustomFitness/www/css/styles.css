@@ -1047,12 +1047,15 @@ a {
   font-family: Montserrat, sans-serif;
   font-size: 15px;
   line-height: 1.6em;
+  text-align: center;
 }
 
 .description-new {
   padding-right: 0px;
   padding-left: 0px;
   font-size: 11px;
+  width: 90%;
+  margin-left: 18px;
 }
 
 .description-new.larger {
@@ -2073,6 +2076,11 @@ input[type=text]:focus, textarea:focus {
   top:0;
 }
 
+div.w-embed.w-video {
+  width: 90%;
+  margin-left: 18px;
+} 
+
 /* Media Queries */
 @media only screen 
 and (min-device-width : 375px) 
@@ -2080,7 +2088,7 @@ and (max-device-width : 667px)
 and (orientation : portrait) { 
   section.mobile-wrapper {
     height: 675px;
-  } 
+  }
 }
 
 @media only screen 

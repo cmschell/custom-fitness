@@ -89,10 +89,12 @@ jQuery('#submit-form').submit(function() {
   var userName = jQuery("#username-field").val() || "";
   var userData = fName + ',' + lName + ',' + userName;
 
+  // clear existing value
   if (storage.getItem("user_data_create")) {
     storage.removeItem("user_data_create")
   }
 
+  // set local storage
   storage.setItem("user_data_create", userData);
 
 });

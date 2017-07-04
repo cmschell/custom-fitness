@@ -20,10 +20,10 @@
           agemonth--;
           ageday = 30 + ageday;
           }
-    // var val = ageyear + "-" + agemonth + "-" + ageday;
     return ageyear;
   }
 
+  // pull from local storage
   var storage = window.localStorage;
   var formData = storage.getItem("form_data")
   var formDataArray = formData ? formData.split(",") : ["", "", "", "", "","",""];
@@ -355,8 +355,6 @@
 
         name = exerciseList[i]["exercise_name"];
         img = 'images/exercise_img/'+exerciseList[i]["exercise_image"];        
-       // img = '../images/exercise_img/'+exerciseList[i]["exercise_image"];
-
 
         if (inputWorkout != "none" || inputGoal == "run faster") {
           // Calculate rest time, sets, reps per exercise
