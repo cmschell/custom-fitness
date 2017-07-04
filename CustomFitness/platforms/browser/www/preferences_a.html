@@ -187,48 +187,29 @@
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
-  <!-- library for localstorage handling -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
 
   <script type="text/javascript">
     
+    var storage = window.localStorage;
+
     jQuery('#email-form').submit(function() {
 
-      var location = jQuery("#node-10 option:selected").val();
-      var fitnessLevel = jQuery("#node-11 option:selected").val();
-      var goal = jQuery("#node-12 option:selected").val();
+      var location = jQuery("#node-10 option:selected").val() || "";
+      var fitnessLevel = jQuery("#node-11 option:selected").val() || "";
+      var goal = jQuery("#node-12 option:selected").val() || "";
       var desiredWorkout = jQuery("#node-13 option:selected").val() ? jQuery("#node-13 option:selected").val() : "none";
 
-      localforage.removeItem('form_data').then(function() {
-          // Run this code once the database has been entirely deleted.
-          console.log('Database is now empty.');
+      // debugger;
 
-          localforage.getItem('user_preferences').then(function (value) {
-           // Do other things once the value has been saved.
-              console.log('Form data retrieved successfully in local storage: birthMonth- '+value[0]+', birthYear- '+value[1]+', userFullName - '+value[2]);
+      var userPreferences = location + ',' + fitnessLevel + ',' + goal + ',' + desiredWorkout;
 
-              var m = value[0];
-              var y = value[1];
-              var fn = value[2];
+      var userPreferencesCombo =  userPreferences + ',' + storage.getItem("user_preferences");
 
-              localforage.setItem('form_data', [location, fitnessLevel, goal, desiredWorkout, m, y, fn]).then(function (value) {
-                 // Do other things once the value has been saved.
-                    console.log('Form data stored successfully in local storage: location - '+location+', fitnessLevel - '+fitnessLevel+', goal - '+goal+', desiredWorkout - '+desiredWorkout+', month - '+m+', year - '+y+', user full name - '+fn);
-                }).catch(function(err) {
-                    // This code runs if there were any errors
-                    console.log('Error soring form data via localforage: '+err);
-                });
+      if (storage.getItem("form_data")) {
+        storage.removeItem("form_data");
+      }
 
-          }).catch(function(err) {
-              // This code runs if there were any errors
-              console.log('Error soring form data via localforage: '+err);
-          });
-
-
-      }).catch(function(err) {
-          // This code runs if there were any errors
-          console.log(err);
-      });
+      storage.setItem("form_data", userPreferencesCombo);
 
     });
 

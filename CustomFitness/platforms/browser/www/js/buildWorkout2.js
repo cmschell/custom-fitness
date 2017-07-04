@@ -1,8 +1,3 @@
-// Get the form data from local storage
-localforage.getItem('form_data').then(function(value) {
-  // This code runs once the value has been loaded
-  // from the offline store.
-
   var calculateAge = function(m,y) {
     var now = new Date(); //Todays Date     
 
@@ -29,16 +24,20 @@ localforage.getItem('form_data').then(function(value) {
     return ageyear;
   }
 
-  var userAge = calculateAge(value[4], value[5]);
+  var storage = window.localStorage;
+  var formData = storage.getItem("form_data")
+  var formDataArray = formData ? formData.split(",") : ["", "", "", "", "","",""];
+
+  var userAge = calculateAge(formDataArray[4], formDataArray[5]);
 
   // Create object for easier handling
   var data = {
-    "location": value[0],
-    "fitnessLevel": value[1],
-    "goal": value[2],
-    "desiredWorkout": value[3],
+    "location": formDataArray[0],
+    "fitnessLevel": formDataArray[1],
+    "goal": formDataArray[2],
+    "desiredWorkout": formDataArray[3],
     "userAge": userAge,
-    "fullName": value[6]
+    "fullName": formDataArray[6]
   };
  
   // Serialize data object to send in POST
@@ -292,7 +291,7 @@ localforage.getItem('form_data').then(function(value) {
     } 
     // create exercise list for when user selects "no goal" and selects desired workout
     if (inputWorkout != "none") {
-        debugger;
+       // debugger;
       switch (inputWorkout) {
         case "Chest":
             exerciseList = exerciseListCreate(exerciseList, chestArray);
@@ -355,7 +354,8 @@ localforage.getItem('form_data').then(function(value) {
       if (exerciseList[i] != undefined) {
 
         name = exerciseList[i]["exercise_name"];
-        img = '../images/exercise_img/'+exerciseList[i]["exercise_image"];
+        img = 'images/exercise_img/'+exerciseList[i]["exercise_image"];        
+       // img = '../images/exercise_img/'+exerciseList[i]["exercise_image"];
 
 
         if (inputWorkout != "none" || inputGoal == "run faster") {
@@ -392,10 +392,3 @@ localforage.getItem('form_data').then(function(value) {
       }
     }
   })
-
-  console.log('Data retrieved from localstorage: ' + value.toString());
-
-}).catch(function(err) {
-  // This code runs if there were any errors
-  console.log('Error retrieving form data from localstorage: ' + err);
-});

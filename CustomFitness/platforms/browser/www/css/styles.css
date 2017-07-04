@@ -2073,4 +2073,23 @@ input[type=text]:focus, textarea:focus {
   top:0;
 }
 
+/* Media Queries */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) 
+and (orientation : portrait) { 
+  section.mobile-wrapper {
+    height: 675px;
+  } 
+}
+
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) 
+and (orientation : portrait) { 
+  section.mobile-wrapper {
+    height: 750px;
+  } 
+}
+
   

@@ -12,8 +12,6 @@
   <link href="images/cf_logo.png" rel="apple-touch-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
-      <!-- library for localstorage handling -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
 </head>
 <body>
   <section class="mobile-wrapper">
@@ -302,43 +300,32 @@
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript">
     
-      localforage.getItem('user_data_create').then(function (value) {
-       // Do other things once the value has been saved.
-          console.log('Form data retrieved successfully in local storage: first name - '+value[0]+', last name - '+value[1]+', userName - '+value[2]);
+  var storage = window.localStorage;
+  
+  var userData = storage.getItem("user_data_create");
+  var userDataArray = userData ? userData.split(",") : ["","",""];    
 
-          $('#firstname-field').val(value[0]);
-          $('#lastname-field').val(value[1]);
-          $('#username-field').val(value[2]);
+  $('#firstname-field').val(userDataArray[0]);
+  $('#lastname-field').val(userDataArray[1]);
+  $('#username-field').val(userDataArray[2]);
 
-      }).catch(function(err) {
-          // This code runs if there were any errors
-          console.log('Error soring form data via localforage: '+err);
-      });
 
-      // Capture first name, last name, username and store in local storage
-      jQuery('#email-form').submit(function() {
+  // Capture first name, last name, username and store in local storage
+  jQuery('#email-form').submit(function() {
 
-        var birthMonth = jQuery("#node-8 option:selected").val();
-        var birthYear = jQuery("#node-9 option:selected").val();
-        var userFullName = jQuery("#firstname-field").val() + ' ' + jQuery("#lastname-field").val();
+      var birthMonth = jQuery("#node-8 option:selected").val() || "";
+      var birthYear = jQuery("#node-9 option:selected").val() || "";
+      var userFullName = (jQuery("#firstname-field").val() || "") + ' ' + (jQuery("#lastname-field").val() || "");
 
-        localforage.removeItem('user_preferences').then(function() {
-            // Run this code once the database has been entirely deleted.
+      var userInfo = birthMonth + ',' + birthYear + ',' + userFullName; 
 
-                  localforage.setItem('user_preferences', [birthMonth, birthYear, userFullName]).then(function (value) {
-                   // Do other things once the value has been saved.
-                      console.log('Form data stored successfully in local storage: birth month - '+birthMonth+', birth year - '+birthYear+', user full name - '+userFullName);
-                  }).catch(function(err) {
-                      // This code runs if there were any errors
-                      console.log('Error soring form data via localforage: '+err);
-                  });
+      if (storage.getItem("user_preferences")) {
+        storage.removeItem("user_preferences");
+      }
 
-        }).catch(function(err) {
-            // This code runs if there were any errors
-            console.log(err);
-        });
+      storage.setItem("user_preferences", userInfo);
 
-      });
+  });
 
   </script>
 

@@ -12,8 +12,6 @@
   <link href="images/cf_logo.png" rel="apple-touch-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
-    <!-- library for localstorage handling -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.5.0/localforage.min.js"></script>
 </head>
 <body>
   <section class="mobile-wrapper">
@@ -80,30 +78,22 @@
   <script type="text/javascript" src="js/scripts.js"></script>
 
 <script type="text/javascript">
+
+var storage = window.localStorage;
   
 // Capture first name, last name, username and store in local storage
 jQuery('#submit-form').submit(function() {
 
-  var fName = jQuery("#first-name-field").val();
-  var lName = jQuery("#last-name-field").val();
-  var userName = jQuery("#username-field").val();
+  var fName = jQuery("#first-name-field").val() || "";
+  var lName = jQuery("#last-name-field").val() || "";
+  var userName = jQuery("#username-field").val() || "";
+  var userData = fName + ',' + lName + ',' + userName;
 
-  localforage.removeItem('user_data_create').then(function() {
-      // Run this code once the database has been entirely deleted.
-      console.log('Database is now empty.');
+  if (storage.getItem("user_data_create")) {
+    storage.removeItem("user_data_create")
+  }
 
-            localforage.setItem('user_data_create', [fName, lName, userName]).then(function (value) {
-             // Do other things once the value has been saved.
-                console.log('Form data stored successfully in local storage: first name - '+fName+', last name - '+lName+', userName - '+userName);
-            }).catch(function(err) {
-                // This code runs if there were any errors
-                console.log('Error soring form data via localforage: '+err);
-            });
-
-  }).catch(function(err) {
-      // This code runs if there were any errors
-      console.log(err);
-  });
+  storage.setItem("user_data_create", userData);
 
 });
 
