@@ -1,15 +1,11 @@
 <?php
- // header("Access-Control-Allow-Origin: *"); We might need this when we upload to server
+ header("Access-Control-Allow-Origin: *"); //We might need this when we upload to server
 
 //Connect To Database
 $hostname = "174.136.46.205";
 $username = "magneti_wpuser";
 $password = "MuseDB!";
 $dbname = "magneti_customfitness";
-
-// Set variables for select query
-$usertable='Location';
-$yourfield = 'Zipcode';
 
 // Connection string
 mysql_connect($hostname,$username, $password) OR DIE ('Unable to connect to database! Please try again later.');
@@ -22,56 +18,24 @@ if (isset($_REQUEST["location"]) && !empty($_REQUEST["location"])) { //Checks if
   $fitnessLevel = $_REQUEST["fitnessLevel"];
   $goal = $_REQUEST["goal"];
   $desiredWorkout = $_REQUEST["desiredWorkout"];
-  $userAge = calcAge();
+  $userAge = $_REQUEST["userAge"];
 
-  // TEST
- /* switch($location) { //Switch case for value of action
-      case "92111": test_function(); break;
-    } */
- // END TEST
 }
 
-function calcAge() {
-  // This needs to be captured once the user logs in - hardcoding for now
-  // $userName = $_REQUEST["userName"];
-  $userName = 'Christina'; // For testing
 
 
-  // Query the database
-  $userNameQuery = 'SELECT MONTH, YEAR FROM User WHERE Username = ' . $userName;
-
-  // Capture results in a variable to use in loop
-  $ageResult = mysql_query($userNameQuery);
-
-  while($row = mysql_fetch_array($ageResult)){
-   $m=$row["MONTH"];
-   $y=$row["YEAR"];
-  }
-
-  $dateString = $y . $m . '01';
-
-  $from = new DateTime($dateString);
-  $to   = new DateTime('today');
-  $age = $from->diff($to)->y;
-
-  echo $age;
-}
-
-//function selectLocationEquipment($location, $goal, $userAge, $desiredWorkout, $fitnessLevel) {
-
-  if($goal) {
-    $equipmentQuery = 'SELECT * FROM Location A, Equipment B WHERE A.Zipcode = {$location} AND A.Zipcode = B.Zipcode AND
-    B.desried_Area = {$desiredWorkout} AND
-    B.MIN_AGE < {$userAge} AND
-    B.MAX_AGE > {$userAge}';
-  } else if ($desiredWorkout) {
-    $equipmentQuery = 'SELECT * FROM Location A, Equipment B WHERE A.Zipcode = {$location} AND A.Zipcode = B.Zipcode AND
-    (B.Goal = {$goal} OR 
-    B.Goal2 = {$goal} OR
-    B.Goal3 = {$goal} OR
-    B.Goal4 = {$goal}) AND
-    B.MIN_AGE < {$userAge} AND
-    B.MAX_AGE > {$userAge}';
+  if($goal == "no goal") {
+    $equipmentQuery = "SELECT exercise_name, desired_workout, exercise_image, goal1, goal2, goal3 FROM Location A, Equipment B WHERE A.zipcode = '$location' AND (A.zipcode = B.zipcode OR A.zipcode = B.zipcode2 OR A.zipcode = B.zipcode3) AND
+    B.desired_workout = '$desiredWorkout' AND
+    B.equipment_min_age < '$userAge' AND
+    B.equipment_max_age > '$userAge'";
+   } else if ($goal != "no goal") {
+    $equipmentQuery = "SELECT exercise_name, desired_workout, exercise_image, goal1, goal2, goal3 FROM Location A, Equipment B WHERE A.zipcode = '$location' AND (A.zipcode = B.zipcode OR A.zipcode = B.zipcode2 OR A.zipcode = B.zipcode3) AND
+      (B.goal1 = '$goal' OR 
+      B.goal2 = '$goal' OR
+      B.goal3 = '$goal') AND
+      B.Equipment_MIN_AGE < '$userAge' AND
+      B.equipment_max_age > '$userAge'";
   }
 
   $equipmentResult = mysql_query($equipmentQuery);
@@ -85,34 +49,6 @@ function calcAge() {
   }
 
   echo json_encode($equipmentData);
-
-//}
-
-// Query the database
-// $query = 'SELECT * FROM ' . $usertable;
-
-// // Capture results in a variable to use in loop
-// $result = mysql_query($query);
-
-// // Create array for query results output
-// $data=array();
- 
-// if($result) {
-
-//    Loop throught the results and push into data array, might need to update
-//    this to handle the results we are getting from query. This is just for simlple
-//    example 
-    
-//   while($row = mysql_fetch_array($result)){
-//    $data[]=$row;
-//   }
-
-//   // Parse to JSON format for handling in workout_a.html
-//   echo json_encode($data);
-
-// } else {
-//   print "Database NOT Found ";
-// }
 
 
 // THIS IS A TEST FUNCTION TO RETURN RESULTS IN JSON FORMAT - use this in the switch statement to test
@@ -131,8 +67,5 @@ function test_function(){
   echo json_encode($return);
 }
 /// END TEST 
-
-// Not sure if we need the below line
-//$conn->close(); 
 
 ?>

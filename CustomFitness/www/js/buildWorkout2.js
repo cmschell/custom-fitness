@@ -51,7 +51,7 @@
   }
 
   // Post the data and create callback function for when we receive results from response.php
-  // $.postJSON("http://localhost/~ChristinaSchell/php/response3.php", dataString, function(data) {
+  // $.postJSON("http://localhost/~ChristinaSchell/php/response.php", dataString, function(data) {
     $.postJSON("http://christinasund.com/custom-fitness/response.php",data, function (data) {
 
     var inputFitLevel = dataString.split("fitnessLevel=")[1].split("&")[0];
