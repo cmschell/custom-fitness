@@ -346,10 +346,18 @@
    $('.w-row .profile-figures-number:eq(1)').text(totalSets);
    $('.w-row .profile-figures-number:eq(2)').text(totalTime);
 
+   var plan = [];
+   for (var i = 0; i < exerciseList.length; i++) {
+     plan.push(exerciseList[i]["exercise_name"]);
+   }
+
+   window._previousWorkout = displayGoal + "|" + plan.join(",");
 
     // Here is where we handle the received results and update the page's html  
     for (var i = 0; i < exerciseList.length; i++) {
       listItem = i + 1;
+
+
 
       if (exerciseList[i] != undefined) {
 

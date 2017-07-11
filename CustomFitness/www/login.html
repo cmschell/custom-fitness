@@ -58,5 +58,30 @@
   <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+
+<script type="text/javascript">
+
+var storage = window.localStorage;
+  
+// Capture first name, last name, username and store in local storage
+jQuery('#submit-form').submit(function() {
+
+
+  var userName = jQuery("#username-field").val() || "";
+  
+
+  // clear existing value
+  if (storage.getItem("user_data_login")) {
+    storage.removeItem("user_data_login")
+  }
+
+  // set local storage
+  storage.setItem("user_data_login", userName);
+
+});
+
+
+</script>
+
 </body>
 </html>
