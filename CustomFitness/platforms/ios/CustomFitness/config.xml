@@ -28,7 +28,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="*youtube*" />
+    <allow-navigation href="*://*youtube.com" />
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
